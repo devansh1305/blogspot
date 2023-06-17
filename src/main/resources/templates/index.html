@@ -1,0 +1,77 @@
+{% extends '_base.html' %}
+
+<!-- display sidebar on right -->
+{% set __sidebar_right__ = true %}
+
+{% block title %}{{ _('Home') }}{% endblock %}
+
+{% block meta %}
+<meta property="og:ad" content="true" />
+<meta property="og:type" content="webpage" />
+<meta property="og:url" content="{{ __url__ }}" />
+<meta property="og:title" content="{{ __website__.name }}" />
+<meta property="og:tag" content="index" />
+{% endblock %}
+
+{% block head %}
+
+{% set __sidebar_right__ = true %}
+
+<style>
+    .x-index-visible {
+        display: block;
+    }
+</style>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="uk-grid">
+    <div class="x-index-top uk-width-1-1">
+        {{ __snippet__.indexTop|raw }}
+    </div>
+</div>
+
+<h3>{{ _('Recent Articles') }}</h3>
+{% for a in recentArticles %}
+<div class="uk-margin uk-clearfix">
+    <div class="uk-margin">
+        <div style="float:left">
+            <a href="/article/{{ a.id }}" target="_blank"><img src="/files/attachments/{{ a.imageId }}/s" /></a>
+        </div>
+        <div style="margin-left:170px;">
+            <h3><a href="/article/{{ a.id }}" target="_blank">{{ a.name }}</a></h3>
+            <p>{{ a.description }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="uk-grid">
+    <div class="x-index-bottom uk-width-1-1">
+        {{ __snippet__.indexBottom|raw }}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block sidebar_right_content %}
+
+<div class="uk-margin">
+    <h3>{{ _('Recent Topics') }}</h3>
+    <div class="x-recent-topics">
+        {% for t in recentTopics %}
+        <div class="uk-margin uk-clearfix">
+            <a href="/user/{{ t.userId }}" target="_blank">
+                <img class="uk-comment-avatar uk-border-circle x-avatar" src="{{ t.userImageUrl }}" style="width:50px;height:50px">
+            </a>
+            <div class="x-title">
+                <a href="/discuss/{{ t.boardId }}/{{ t.id }}">{{ t.name }}</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
