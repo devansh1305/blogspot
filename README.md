@@ -71,19 +71,4 @@ Please check [application.yml](src/main/resources/application.yml) for environme
 
 ### Deploy
 
-blogspot is deployed by Docker. Images can be pulled from [DockerHub](https://hub.docker.com/repository/docker/devansh1305/blogspot).
-
-```
-                        ┌─────────────────────────────────────────┐
-                        │                   VPC                   │
-                        │         ┌───────────┐                   │
-                        │         │  Docker   │     ┌────────────┐│
-        https        ┌──┴──┐      │┌─────────┐│     │  AWS:RDS   ││
-◀───────────────────▶│     │ http ││ AWS:ECS ││◀───▶│   MySQL    ││
- https ┌─────┐ https │ ELB │◀────▶│└─────────┘│     └────────────┘│
-◀─────▶│ CDN │◀─────▶│     │      │┌─────────┐│     ┌────────────┐│
-       └─────┘       └──┬──┘      ││ AWS:ECS ││◀───▶│ElasticCache││
-                        │         │└─────────┘│     │   Redis    ││
-                        │         └───────────┘     └────────────┘│
-                        └─────────────────────────────────────────┘
-```
+![Alt text](architecture.png)
